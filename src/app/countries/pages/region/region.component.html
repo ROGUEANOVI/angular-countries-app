@@ -1,0 +1,37 @@
+<h2>Por Region: {{activeRegion | titlecase}}</h2>
+<hr>
+
+<div class="row">
+  <div class="col-6">
+   <app-countries-input
+   (onEnter)="search($event)"
+   placeholder="Buscar Region..."
+   >
+   </app-countries-input> 
+  </div>
+  <div class="col-6">
+    <div *ngFor="let region of regions" class="btn-group" role="group" aria-label="Basic outlined example">
+      <button 
+        type="button" 
+        [class]="getClassCSS(region)"
+        (click)="regionActivate(region)"
+      >
+        {{region}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div *ngIf="isError" class="alert alert-danger">
+  No se encontro nada con el termino {{term}}
+  {{countries===[]}}
+</div>
+
+<div *ngIf="countries.length > 0" class="row">
+  <div class="col">
+    <app-countries-table [countries]="countries"></app-countries-table>
+  </div>
+</div>
+
